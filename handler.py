@@ -5,8 +5,8 @@ from boto3 import client as boto3_client
 
 
 def handler(event, context):
-    print(event)
-    print("Hello boss")
+    # print(event)
+    # print("Hello boss")
     video_filename = event['Records']['s3']['object']['key']
     print(video_filename)
 	# filename = os.path.basename(video_filename)

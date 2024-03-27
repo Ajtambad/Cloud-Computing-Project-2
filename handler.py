@@ -8,6 +8,7 @@ def handler(event, context):
     print(event)
     print("Hello boss")
     video_filename = event['Records']['s3']['object']['key']
+    print(video_filename)
 	# filename = os.path.basename(video_filename)
     # outdir = os.path.splitext(filename)[0]
     # outdir = os.path.join("/tmp",outdir)

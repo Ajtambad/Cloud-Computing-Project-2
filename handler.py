@@ -7,6 +7,7 @@ from boto3 import client as boto3_client
 def handler(event, context):
     print(event)
     print("Hello boss")
+    video_filename = event['Records']['s3']['object']['key']
 	# filename = os.path.basename(video_filename)
     # outdir = os.path.splitext(filename)[0]
     # outdir = os.path.join("/tmp",outdir)

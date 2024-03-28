@@ -17,7 +17,7 @@ def handler(event, context):
     outdir = os.path.join("/tmp",outdir)
     output_dir = outdir
     s3.put_object(
-        key=(outdir+'/'),
+        Key=(outdir+'/'),
         Bucket=stage_1_bucket
     )
 

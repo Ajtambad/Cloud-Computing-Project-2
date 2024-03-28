@@ -9,9 +9,11 @@ import os
 stage_1_bucket = '1229560048-stage-1'
 s3 = boto3_client('s3', region_name='us-east-1')
 
-def handler(event, context):
+# def handler(event, context):
+def handler():
 
-    video_filename = event['Records'][0]['s3']['object']['key']
+    # video_filename = event['Records'][0]['s3']['object']['key']
+    video_filename = '/test_2.mp4'
     filename = os.path.basename(video_filename)
     outdir = os.path.splitext(filename)[0]
     outdir = os.path.join("/tmp",outdir)
@@ -37,3 +39,6 @@ def handler(event, context):
     print(outdir)
     print(fps)
     return outdir
+
+if __name__=='__main__':
+    handler()

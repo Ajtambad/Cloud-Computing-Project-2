@@ -18,13 +18,13 @@ def handler():
     outdir = os.path.splitext(filename)[0]
     outdir = os.path.join("/tmp",outdir)
     output_dir = outdir
-    s3.put_object(
-        Key=(outdir+'/'),
-        Bucket=stage_1_bucket
-    )
+    # s3.put_object(
+    #     Key=(outdir+'/'),
+    #     Bucket=stage_1_bucket
+    # )
 
-    # if not os.path.exists(outdir):
-    #     os.makedirs(outdir)
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
 
     split_cmd = '/usr/bin/ffmpeg -ss 0 -r 1 -i ' +video_filename+ ' -vf fps=1/10 -start_number 0 -vframes 10 ' + outdir + "/" + 'output-%02d.jpg -y'
     try:

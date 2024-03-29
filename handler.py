@@ -5,6 +5,7 @@ from boto3 import client as boto3_client
 import subprocess
 import math
 import os
+import time
 
 stage_1_bucket = '1229560048-stage-1'
 input_bucket = '1229560048-input'
@@ -40,4 +41,5 @@ def handler(event, context):
     fps_cmd = 'ffmpeg -i ' + video_filename + ' 2>&1 | sed -n "s/.*, \\(.*\\) fp.*/\\1/p"'
     fps = subprocess.check_output(fps_cmd, shell=True).decode("utf-8").rstrip("\n")
     fps = math.ceil(float(fps))
+    time.sleep(2)
     return outdir

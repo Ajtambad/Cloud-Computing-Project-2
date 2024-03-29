@@ -14,8 +14,8 @@ s3 = boto3_client('s3', region_name='us-east-1')
 def handler(event, context):
 
     video_filename = event['Records'][0]['s3']['object']['key']
-    download_path = os.path.join('/tmp', video_filename)
-    file = s3.download_file(input_bucket, video_filename, download_path) #Download from input S3 bucket
+    video_filename = os.path.join('/tmp', video_filename)
+    file = s3.download_file(input_bucket, video_filename, video_filename) #Download from input S3 bucket
     filename = os.path.basename(video_filename)
     outdir = os.path.splitext(filename)[0]
     outdir = os.path.join("/tmp",outdir)

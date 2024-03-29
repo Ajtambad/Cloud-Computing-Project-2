@@ -25,7 +25,7 @@ def handler(event, context):
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
-    split_cmd = '/usr/bin/ffmpeg -ss 0 -r 1 -i ' +video_filename+ ' -vf fps=1/10 -start_number 0 -vframes 10 ' + outdir + "/" + 'output-%02d.jpg -y'
+    split_cmd = '/usr/bin/ffmpeg -ss 0 -r 1 -i ' +video_filename+ ' -vf fps=1/10 -start_number 0 -vframes 10 ' + outdir + "/" + 'output_%02d.jpg -y'
     try:
         subprocess.check_call(split_cmd, shell=True)
     except subprocess.CalledProcessError as e:

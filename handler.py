@@ -18,10 +18,7 @@ def handler():
     outdir = os.path.splitext(filename)[0]
     outdir = os.path.join("/tmp",outdir)
     output_dir = outdir
-    # s3.put_object(
-    #     Key=(outdir+'/'),
-    #     Bucket=stage_1_bucket
-    # )
+    
 
     if not os.path.exists(outdir):
         os.makedirs(outdir)
@@ -35,7 +32,11 @@ def handler():
 
     dir = os.listdir(outdir)
     for file in dir:
-        print(file)
+        s3.put_object(
+            Key=(filename.split('.')[0] + '/'),
+            Body=file,
+            Bucket=stage_1_bucket
+            )
     fps_cmd = 'ffmpeg -i ' + video_filename + ' 2>&1 | sed -n "s/.*, \\(.*\\) fp.*/\\1/p"'
     fps = subprocess.check_output(fps_cmd, shell=True).decode("utf-8").rstrip("\n")
     fps = math.ceil(float(fps))

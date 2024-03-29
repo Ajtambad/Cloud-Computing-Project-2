@@ -7,17 +7,19 @@ import math
 import os
 
 stage_1_bucket = '1229560048-stage-1'
+input_bucket = '1229560048-input'
+
 s3 = boto3_client('s3', region_name='us-east-1')
 
 # def handler(event, context):
 def handler():
 
     # video_filename = event['Records'][0]['s3']['object']['key']
-    video_filename = '/test_2.mp4'
+    video_filename = 'test_2.mp4'
+    file = s3.download_file(input_bucket, video_filename, video_filename)
     filename = os.path.basename(video_filename)
     outdir = os.path.splitext(filename)[0]
     outdir = os.path.join("/tmp",outdir)
-    output_dir = outdir
     
     # s3.put_object(Key=(filename.split('.')[0] + '/'))
     if not os.path.exists(outdir):

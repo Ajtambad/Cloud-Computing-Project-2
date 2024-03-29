@@ -41,5 +41,5 @@ def handler(event, context):
     fps_cmd = 'ffmpeg -i ' + video_filename + ' 2>&1 | sed -n "s/.*, \\(.*\\) fp.*/\\1/p"'
     fps = subprocess.check_output(fps_cmd, shell=True).decode("utf-8").rstrip("\n")
     fps = math.ceil(float(fps))
-    time.sleep(2)
+    time.sleep(3)
     return outdir

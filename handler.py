@@ -33,6 +33,9 @@ def handler():
         print(e.returncode)
         print(e.output)
 
+    dir = os.listdir(outdir)
+    for file in dir:
+        print(file)
     fps_cmd = 'ffmpeg -i ' + video_filename + ' 2>&1 | sed -n "s/.*, \\(.*\\) fp.*/\\1/p"'
     fps = subprocess.check_output(fps_cmd, shell=True).decode("utf-8").rstrip("\n")
     fps = math.ceil(float(fps))

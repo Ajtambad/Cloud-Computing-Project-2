@@ -3,9 +3,7 @@
 
 from boto3 import client as boto3_client
 import subprocess
-import math
 import os
-import time
 
 stage_1_bucket = '1229560048-stage-1'
 input_bucket = '1229560048-input'
@@ -22,7 +20,6 @@ def handler(event, context):
     outdir = os.path.splitext(filename)[0]
     outdir = os.path.join("/tmp",outdir)
 
-    # s3.put_object(Key=(filename.split('.')[0] + '/'))
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
@@ -37,9 +34,4 @@ def handler(event, context):
     dir = os.listdir(outdir)
     for file in dir:
         s3.upload_file(outdir + '/' + file, stage_1_bucket, filename.split('.')[0] + '/{}'.format(file))
-
-    fps_cmd = 'ffmpeg -i ' + video_filename + ' 2>&1 | sed -n "s/.*, \\(.*\\) fp.*/\\1/p"'
-    fps = subprocess.check_output(fps_cmd, shell=True).decode("utf-8").rstrip("\n")
-    fps = math.ceil(float(fps))
-    time.sleep(3)
     return outdir

@@ -4,6 +4,7 @@
 from boto3 import client as boto3_client
 import subprocess
 import os
+import time
 
 stage_1_bucket = '1229560048-stage-1'
 input_bucket = '1229560048-input'
@@ -34,4 +35,5 @@ def handler(event, context):
     dir = os.listdir(outdir)
     for file in dir:
         s3.upload_file(outdir + '/' + file, stage_1_bucket, filename.split('.')[0] + '/{}'.format(file))
+    time.sleep(2)
     return outdir
